@@ -19,16 +19,30 @@ Write-Host "Aktuelle Änderungen:" -ForegroundColor Blue
 git status -s
 
 # 2. Bestätigung vom Benutzer einholen
-$commit_msg = Read-Host "Commit-Nachricht eingeben (oder 'q' zum Abbrechen)"
+$confirm = Read-Host "Änderungen committen und pushen? (Y/n)"
 
-if ($commit_msg -eq "q") {
+if ($confirm -eq "n" -or $confirm -eq "N") {
     Write-Host "Vorgang abgebrochen." -ForegroundColor Yellow
     exit
+}
+
+# Standardnachricht verwenden oder benutzerdefinierte Nachricht abfragen
+$use_default = Read-Host "Standardnachricht 'Update Repository' verwenden? (Y/n)"
+
+if ($use_default -eq "n" -or $use_default -eq "N") {
+    $commit_msg = Read-Host "Commit-Nachricht eingeben"
+} else {
+    $commit_msg = "Update Repository"
 }
 
 # 3. Änderungen hinzufügen
 Write-Host "Füge Änderungen hinzu..." -ForegroundColor Blue
 git add .
+git add scripts/update_github.ps1
+
+# Option 1: Wenn Sie den Inhalt als normalen Ordner behandeln möchten
+git rm --cached localgpt_vision_django
+git add localgpt_vision_django
 
 # 4. Commit erstellen
 Write-Host "Erstelle Commit..." -ForegroundColor Blue
@@ -44,3 +58,5 @@ if ($LASTEXITCODE -eq 0) {
 } else {
     Write-Host "⚠ Es gab ein Problem beim Pushen. Bitte überprüfen Sie die Fehlermeldungen." -ForegroundColor Yellow
 }
+
+
