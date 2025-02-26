@@ -1,0 +1,122 @@
+Flask
+byaldi
+cmake
+pkgconfig
+#python-poppler
+torch
+torchvision
+google-generativeai
+openai
+docx2pdf
+qwen-vl-utils
+vllm>=0.6.1.post1; sys_platform != 'darwin'
+mistral_common>=1.4.1
+einops
+mistral_common[opencv]
+mistral_common
+mistral_inference
+groq
+markdown
+hf_transfer
+ollama
+django
+django-cors-headers
+django-rest-framework
+django-channels
+django-channels-redis
+django-channels-graphql-ws
+django-channels-auth-login
+django-channels-auth-logout
+smolagents
+
+# Audio Processing
+whisper-fast  # Insanely Fast Whisper
+distil-whisper  # Distilled Whisper for mobile
+
+# Text-to-Speech
+coqui-tts  # TTS capabilities
+facebook-mms  # Multilingual support
+
+# Vision and Image Processing
+segment-anything  # SAM model
+controlnet-utils  # ControlNet
+clip  # CLIP model for vision encoding
+colpali  # ColPali model
+colqwen  # Colqwen model
+byaldi-rag  # RAG functionality
+
+# Analytics & NLP
+bertopic  # Topic modeling
+deberta  # Text classification
+tapex  # Structured data extraction
+layoutlm-document-qa  # Document analysis
+data2vec-vision  # Multimodal analysis
+imagebind-model  # Cross-modal understanding
+bloomz  # Mehrsprachige Klassifizierung
+deepseek-r1  # DeepSeek R1 model
+
+# WhatsApp Analysis
+nltk  # Natural Language Processing
+spacy  # Advanced NLP
+urlextract  # URL extraction
+pandas  # Data manipulation
+numpy  # Numerical operations
+
+# Code Analysis
+codebert-analysis  # Code understanding
+starcoder  # Code generation
+
+# Search & Ranking
+searxng  # Search engine integration
+rank-bm25  # Ranking algorithm
+perplexica  # Perplexica integration
+
+# Development Tools
+pytest
+black
+isort
+mypy
+pre-commit
+jupyter  # Notebook support
+ipython  # Enhanced Python shell
+
+# Performance & Optimization
+torch-optimizer
+accelerate
+bitsandbytes  # Model quantization
+redis  # Caching
+celery  # Task queue
+flower  # Celery monitoring
+
+# Security
+python-jose  # JWT
+passlib  # Password hashing
+cryptography  # Security utilities
+django-environ  # Environment variables
+django-guardian  # Object-level permissions
+
+# Database
+psycopg2-binary  # PostgreSQL adapter
+django-redis  # Redis integration
+
+# Testing
+pytest-django  # Django testing
+pytest-asyncio  # Async testing
+coverage  # Code coverage
+
+# Vision Transformers & Layout Analysis
+cswin-transformer  # CSWin Transformer implementation
+timm>=0.9.2  # PyTorch Image Models
+einops>=0.6.1  # Einstein-like notation operations
+torch-scatter  # Scatter operations for sparse tensors
+torch-sparse  # Sparse tensor operations
+torch-geometric  # Graph neural networks
+opencv-python  # Image processing
+albumentations  # Image augmentation
+transformers[vision]  # Hugging Face Vision Transformers
+
+# Layout Analysis Dependencies
+#detectron2  # Instance segmentation
+layoutparser  # Document layout analysis
+pdf2image  # PDF to image conversion
+pytesseract  # OCR support (optional for hybrid approaches)
