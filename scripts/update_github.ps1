@@ -2,6 +2,18 @@
 
 Write-Host "=== GitHub Update Script ===" -ForegroundColor Yellow
 
+# Überprüfen Sie die aktuelle Remote-URL
+Write-Host "Aktuelle Remote-URL:" -ForegroundColor Blue
+git remote -v
+
+# Ändern Sie die Remote-URL auf Ihr Repository
+Write-Host "Setze Remote-URL auf dein Repository..." -ForegroundColor Blue
+git remote set-url origin https://github.com/japorto100/Backend-to-merge.git
+
+# Überprüfen Sie, ob die Änderung erfolgreich war
+Write-Host "Neue Remote-URL:" -ForegroundColor Blue
+git remote -v
+
 # 1. Aktuelle Änderungen anzeigen
 Write-Host "Aktuelle Änderungen:" -ForegroundColor Blue
 git status -s
