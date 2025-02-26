@@ -40,10 +40,6 @@ Write-Host "Füge Änderungen hinzu..." -ForegroundColor Blue
 git add .
 git add scripts/update_github.ps1
 
-# Option 1: Wenn Sie den Inhalt als normalen Ordner behandeln möchten
-git rm --cached localgpt_vision_django
-git add localgpt_vision_django
-
 # 4. Commit erstellen
 Write-Host "Erstelle Commit..." -ForegroundColor Blue
 git commit -m $commit_msg
