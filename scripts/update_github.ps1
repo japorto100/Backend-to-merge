@@ -14,6 +14,12 @@ git remote set-url origin https://github.com/japorto100/Backend-to-merge.git
 Write-Host "Neue Remote-URL:" -ForegroundColor Blue
 git remote -v
 
+# Entfernen Sie das Submodul aus der Git-Konfiguration
+Write-Host "Entferne localgpt_vision_django aus der Git-Konfiguration..." -ForegroundColor Blue
+git rm --cached localgpt_vision_django
+git config -f .git/config --remove-section submodule.localgpt_vision_django 2>$null
+Remove-Item -Path .git/modules/localgpt_vision_django -Recurse -Force -ErrorAction SilentlyContinue
+
 # 1. Aktuelle Änderungen anzeigen
 Write-Host "Aktuelle Änderungen:" -ForegroundColor Blue
 git status -s
@@ -39,13 +45,6 @@ if ($use_default -eq "n" -or $use_default -eq "N") {
 Write-Host "Füge Änderungen hinzu..." -ForegroundColor Blue
 git add .
 git add scripts/update_github.ps1
-
-# Fügen Sie explizit Dateien aus dem Django-Verzeichnis hinzu
-git add localgpt_vision_django/**/*.py
-git add localgpt_vision_django/**/*.html
-git add localgpt_vision_django/**/*.css
-git add localgpt_vision_django/**/*.js
-git add localgpt_vision_django/**/*.json
 
 # 4. Commit erstellen
 Write-Host "Erstelle Commit..." -ForegroundColor Blue

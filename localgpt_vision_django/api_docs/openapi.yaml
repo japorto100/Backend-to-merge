@@ -1,0 +1,527 @@
+openapi: 3.0.0
+info:
+  title: LocalGPT Vision API
+  version: 1.0.0
+  description: API for LocalGPT Vision, a Django-based backend for AI chat and vision applications
+
+servers:
+  - url: http://localhost:8000/api
+    description: Development server
+
+paths:
+  /chat/sessions/:
+    get:
+      summary: List chat sessions
+      description: Get a list of all chat sessions for the authenticated user
+      tags:
+        - Chat
+      security:
+        - BearerAuth: []
+      responses:
+        '200':
+          description: A list of chat sessions
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ChatSession'
+    post:
+      summary: Create a new chat session
+      description: Create a new chat session for the authenticated user
+      tags:
+        - Chat
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                  description: Title of the chat session
+              required:
+                - title
+      responses:
+        '201':
+          description: Chat session created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChatSession'
+
+  /chat/sessions/{session_id}/:
+    get:
+      summary: Get chat session details
+      description: Get details of a specific chat session
+      tags:
+        - Chat
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: session_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Chat session details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChatSession'
+    delete:
+      summary: Delete a chat session
+      description: Delete a specific chat session
+      tags:
+        - Chat
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: session_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '204':
+          description: Chat session deleted
+
+  /chat/sessions/{session_id}/messages/:
+    get:
+      summary: List messages in a chat session
+      description: Get a list of all messages in a specific chat session
+      tags:
+        - Chat
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: session_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: A list of messages
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Message'
+    post:
+      summary: Send a message in a chat session
+      description: Send a new message in a specific chat session and get AI response
+      tags:
+        - Chat
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: session_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                message:
+                  type: string
+                  description: Message content
+                model_id:
+                  type: string
+                  description: ID of the AI model to use (optional)
+                file_id:
+                  type: string
+                  format: uuid
+                  description: ID of an uploaded file to include (optional)
+              required:
+                - message
+      responses:
+        '201':
+          description: Message sent and AI response received
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  user_message:
+                    $ref: '#/components/schemas/Message'
+                  ai_response:
+                    $ref: '#/components/schemas/Message'
+
+  /models/files/:
+    get:
+      summary: List uploaded files
+      description: Get a list of all files uploaded by the authenticated user
+      tags:
+        - Files
+      security:
+        - BearerAuth: []
+      responses:
+        '200':
+          description: A list of uploaded files
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UploadedFile'
+    post:
+      summary: Upload a file
+      description: Upload a new file for processing
+      tags:
+        - Files
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+                  description: File to upload
+                file_type:
+                  type: string
+                  description: Type of file (document, image, video, audio)
+              required:
+                - file
+                - file_type
+      responses:
+        '201':
+          description: File uploaded and processed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UploadedFile'
+
+  /models/files/{file_id}/:
+    get:
+      summary: Get file details
+      description: Get details of a specific uploaded file
+      tags:
+        - Files
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: file_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: File details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UploadedFile'
+    delete:
+      summary: Delete a file
+      description: Delete a specific uploaded file
+      tags:
+        - Files
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: file_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '204':
+          description: File deleted
+
+  /search/:
+    post:
+      summary: Search content
+      description: Search for content matching a query
+      tags:
+        - Search
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                query:
+                  type: string
+                  description: Search query
+                filters:
+                  type: object
+                  description: Search filters (optional)
+              required:
+                - query
+      responses:
+        '200':
+          description: Search results
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  query:
+                    type: string
+                  filters:
+                    type: object
+                  results:
+                    type: object
+                    properties:
+                      messages:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Message'
+                      files:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/UploadedFile'
+                      sessions:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/ChatSession'
+                      total_count:
+                        type: integer
+
+  /users/profile/:
+    get:
+      summary: Get user profile
+      description: Get the profile of the authenticated user
+      tags:
+        - Users
+      security:
+        - BearerAuth: []
+      responses:
+        '200':
+          description: User profile
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserProfile'
+    patch:
+      summary: Update user profile
+      description: Update the profile of the authenticated user
+      tags:
+        - Users
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserProfileUpdate'
+      responses:
+        '200':
+          description: User profile updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserProfile'
+
+  /auth/token/:
+    post:
+      summary: Get authentication token
+      description: Get a JWT token for authentication
+      tags:
+        - Authentication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                password:
+                  type: string
+              required:
+                - username
+                - password
+      responses:
+        '200':
+          description: Authentication successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  access:
+                    type: string
+                    description: JWT access token
+                  refresh:
+                    type: string
+                    description: JWT refresh token
+
+  /auth/token/refresh/:
+    post:
+      summary: Refresh authentication token
+      description: Get a new JWT token using a refresh token
+      tags:
+        - Authentication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                refresh:
+                  type: string
+                  description: JWT refresh token
+              required:
+                - refresh
+      responses:
+        '200':
+          description: Token refreshed
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  access:
+                    type: string
+                    description: New JWT access token
+
+components:
+  schemas:
+    ChatSession:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        title:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        user:
+          type: string
+          format: uuid
+        message_count:
+          type: integer
+
+    Message:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        session:
+          type: string
+          format: uuid
+        role:
+          type: string
+          enum: [user, assistant, system]
+        content:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        file_id:
+          type: string
+          format: uuid
+          nullable: true
+        file_type:
+          type: string
+          nullable: true
+
+    UploadedFile:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        user:
+          type: string
+          format: uuid
+        file:
+          type: string
+          description: File URL
+        file_type:
+          type: string
+          enum: [document, image, video, audio]
+        upload_date:
+          type: string
+          format: date-time
+        processed:
+          type: boolean
+        processing_results:
+          type: object
+
+    UserProfile:
+      type: object
+      properties:
+        user:
+          type: object
+          properties:
+            id:
+              type: string
+              format: uuid
+            username:
+              type: string
+            email:
+              type: string
+            first_name:
+              type: string
+            last_name:
+              type: string
+        theme:
+          type: string
+          enum: [light, dark, system]
+        default_model:
+          type: string
+        daily_message_limit:
+          type: integer
+        daily_file_upload_limit:
+          type: integer
+        messages_sent_today:
+          type: integer
+        files_uploaded_today:
+          type: integer
+
+    UserProfileUpdate:
+      type: object
+      properties:
+        theme:
+          type: string
+          enum: [light, dark, system]
+        default_model:
+          type: string
+        openai_api_key:
+          type: string
+        anthropic_api_key:
+          type: string
+
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT 
