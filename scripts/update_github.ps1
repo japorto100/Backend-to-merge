@@ -40,6 +40,13 @@ Write-Host "Füge Änderungen hinzu..." -ForegroundColor Blue
 git add .
 git add scripts/update_github.ps1
 
+# Fügen Sie explizit Dateien aus dem Django-Verzeichnis hinzu
+git add localgpt_vision_django/**/*.py
+git add localgpt_vision_django/**/*.html
+git add localgpt_vision_django/**/*.css
+git add localgpt_vision_django/**/*.js
+git add localgpt_vision_django/**/*.json
+
 # 4. Commit erstellen
 Write-Host "Erstelle Commit..." -ForegroundColor Blue
 git commit -m $commit_msg
@@ -54,5 +61,8 @@ if ($LASTEXITCODE -eq 0) {
 } else {
     Write-Host "⚠ Es gab ein Problem beim Pushen. Bitte überprüfen Sie die Fehlermeldungen." -ForegroundColor Yellow
 }
+
+# Lokalen Branch umbenennen
+git branch -m master main
 
 
