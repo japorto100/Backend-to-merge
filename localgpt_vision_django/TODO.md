@@ -47,21 +47,36 @@
   - [x] File handling API endpoints
 - [x] Implement AI response generation
 - [x] Implement file processing
-- [x] Implement search functionality (placeholder)
+- [x] Implement search functionality
 
 ### 4. Frontend Integration
-- [ ] Set up Bruno and/or Perplexica for UI
-  - [x] Create Bruno components for file upload
-  - [ ] Create Bruno components for chat interface
-  - [ ] Create Bruno components for search interface
-  - [ ] Create Bruno components for settings interface
-  - [ ] Integrate Bruno components with Django backend
-- [x] Create temporary Django templates as reference/prototypes
-  - [x] Base template
-  - [x] Chat interface template
-  - [x] File upload template
-  - [x] Search template
-  - [x] Settings template
+- [x] UI-Komponenten Setup
+  - [x] Perplexica Chat-Interface als Basis
+    - [x] Chat-Fenster
+    - [x] Nachrichtendarstellung
+    - [x] Dateiupload-Interface
+    - [x] Suchfunktionalität
+    - [x] Erweiterte Features
+      - [x] Copilot Mode Integration
+      - [x] Focus Mode Varianten
+      - [x] Message Features
+      - [x] History Management
+  
+  - [x] Bruno UI-Elemente
+    - [x] Debug & Performance Features
+      - [x] Request/Response-Visualisierung
+      - [x] Performance-Metriken Display
+      - [x] Error Tracking
+    - [x] Development Tools
+      - [x] API-Test-Interface
+      - [x] Response Formatter
+    - [x] Monitoring Dashboard
+
+  - [x] Implementiert
+    - [x] SearchBar mit Multi-Provider Support
+    - [x] ResultsContainer Komponenten
+    - [x] AnalyticsPanel mit Visualisierungen
+    - [x] DocumentViewer für verschiedene Formate
 
 ### 5. API Configuration
 - [x] Configure main API URLs
@@ -157,6 +172,55 @@ class ColPaliAgent(CodeAgent):
             DocumentVisionTool(self.model)
         ]
 ```
+
+#### C. Orchestrierung und Kommunikation zwischen Komponenten
+- [ ] Implementiere Agenten-Orchestrierung für:
+  - [ ] Chat-Interface zu Search-Interface Kommunikation
+  - [ ] Automatische Auswahl des passenden Providers basierend auf Anfrage
+  - [ ] Verarbeitung und Formatierung von Suchergebnissen für Chat-Antworten
+  - [ ] Intelligente Weiterleitung von Anfragen an spezialisierte Agenten
+
+#### D. Spezialisierte Agenten für verschiedene Aufgaben
+- [ ] Recherche-Agent für Web-Suche und Informationsbeschaffung
+- [ ] Dokumenten-Agent für Analyse von PDFs, Bildern und strukturierten Dokumenten
+- [ ] Code-Agent für Programmieraufgaben und Code-Analyse
+- [ ] Daten-Agent für Tabellen, Diagramme und strukturierte Daten
+- [ ] Business-Agent für Unternehmensanalysen und Berichte
+
+#### E. Optional: Node-RED Integration für visuelle Workflow-Erstellung
+- [ ] Proof of Concept für Node-RED Integration:
+  - [ ] Node.js-basierte Node-RED-Instanz einrichten
+  - [ ] Custom Nodes für SmolAgents-Funktionalitäten entwickeln
+  - [ ] API-Schnittstelle zwischen Django und Node-RED implementieren
+  - [ ] Authentifizierung und Sicherheit konfigurieren
+
+- [ ] Vollständige Integration (nach erfolgreicher PoC):
+  - [ ] SmolAgents im Backend für die eigentliche Agentenlogik
+  - [ ] Node-RED als visuelle Workflow-Oberfläche
+  - [ ] Custom Node-RED Nodes für SmolAgents-Funktionen
+  - [ ] Workflow-Persistenz in Django-Datenbank
+  - [ ] Benutzerfreundliche UI für Nicht-Entwickler
+
+#### F. Erweiterte Anwendungsfälle und Integrationen
+- [ ] Integration mit bestehenden Komponenten:
+  - [ ] Perplexica Search für erweiterte Informationsbeschaffung
+  - [ ] WhatsApp-Analyse für Konversationsverständnis
+  - [ ] Business Analytics für datengestützte Entscheidungen
+  - [ ] Metabase für Visualisierung und Reporting
+
+- [ ] Innovative Anwendungsfälle:
+  - [ ] Automatisierte Recherche-Workflows mit mehreren Quellen
+  - [ ] Dokumentenanalyse mit Extraktion und Zusammenfassung
+  - [ ] Multimodale Analyse von gemischten Inhalten (Text, Bild, Tabellen)
+  - [ ] Interaktive Assistenten mit spezialisierten Fähigkeiten
+
+#### G. Evaluierung und Optimierung
+- [ ] Vergleichsmetriken für verschiedene Agent-Implementierungen
+- [ ] A/B-Tests für verschiedene Orchestrierungsstrategien
+- [ ] Performance-Optimierung für Echtzeit-Anwendungen
+- [ ] Feedback-Schleife für kontinuierliche Verbesserung
+
+**WICHTIGER HINWEIS:** Die SmolAgents-Integration ist ein zentraler Bestandteil der Anwendung, da sie die intelligente Verbindung zwischen verschiedenen Komponenten ermöglicht. Die Implementierung sollte schrittweise erfolgen, beginnend mit einfachen Anwendungsfällen wie der Chat-zu-Suche-Kommunikation, bevor komplexere Orchestrierungen implementiert werden. Die Node-RED-Integration erhöht die Komplexität des Deployments, bietet aber eine intuitive visuelle Oberfläche für die Konfiguration und Orchestrierung von Agenten.
 
 ### 2. Audio-Modell Integration
 
@@ -465,134 +529,384 @@ class HybridAnalyzer:
 - [ ] API-Endpunkte für verschiedene Analysetypen
 - [ ] UI für Analyseergebnisse
 
-### 14. Bruno API Testing Integration
-# Reference: https://github.com/usebruno/bruno
+### 14. Bruno API Testing & UI Integration
 
-#### A. Setup & Integration
-```bash
-# Installation
-brew install bruno  # Mac
-choco install bruno # Windows
-snap install bruno # Linux
-```
+#### A. Bruno UI Integration
+- [x] Identifiziere nützliche UI-Komponenten aus Bruno:
+  - [x] Request/Response-Viewer
+  - [x] API-Test-Interface
+  - [x] Performance-Monitoring-Komponenten
+  - [x] Debug-Tools
 
-#### B. Anwendungsfälle für WhatsApp-Analyse
-- [ ] API Endpoints für WhatsApp-Daten Testing
-  ```javascript
-  // Bruno Collection Structure
-  {
-    "name": "WhatsApp Analysis API",
-    "folders": [
-      {
-        "name": "Chat Analysis",
-        "requests": [
-          "message-categorization",
-          "media-analysis",
-          "topic-detection"
-        ]
-      }
-    ]
-  }
-  ```
+#### B. Datenbank-UI Kopplung
+- [ ] Entwickle synchronisierte Ansicht (wird im anderen Backend implementiert)
+  - [ ] API-Test-Ergebnisse
+  - [ ] Datenbank-Zustandsänderungen
+  - [ ] Performance-Metriken
 
-#### C. Vorteile für das Projekt
-
-1. **Offline-First**:
-   - [ ] Lokale Speicherung der API-Tests
-   - [ ] Keine Cloud-Abhängigkeit
-   - [ ] Datenschutzkonforme Testumgebung
-
-2. **Git-Integration**:
-   - [ ] Versionierung der API-Tests
-   - [ ] Team-Collaboration über Git
-   - [ ] Einfaches Tracking von API-Änderungen
-
-3. **Performance Testing**:
-   - [ ] Lasttest-Szenarien erstellen
-   - [ ] Response-Zeiten monitoren
-   - [ ] Fehlerszenarien testen
-
-#### D. Integration Tasks
-- [ ] Bruno Collections für verschiedene Analyse-Endpoints erstellen
-- [ ] Test-Suites für verschiedene Datentypen aufsetzen
-- [ ] Automatisierte Tests implementieren
-- [ ] CI/CD Pipeline Integration
-- [ ] Dokumentation der API-Tests erstellen
-
-#### E. Integration mit Datenbank-UI
-1. **Kombinierter Workflow**:
-   - [ ] Bruno API-Tests mit Datenbank-Validierung verknüpfen
-   - [ ] Automatische Verifizierung der Datenbankeinträge
-   ```python
-   # Beispiel-Workflow
-   class TestWorkflow:
-       def test_api_and_verify_db(self):
-           # 1. Bruno API-Test ausführen
-           api_response = bruno.execute_test("chat-analysis")
-           
-           # 2. Datenbank-Überprüfung
-           db_result = db_ui.query_result(api_response.id)
-           
-           # 3. Validierung
-           assert api_response.data == db_result
-   ```
-
-2. **Entwicklungs-Tools Kopplung**:
-   - [ ] Synchronisierte Ansichten zwischen Bruno und DB-UI
-   - [ ] Gemeinsame Test-Szenarien erstellen
-   - [ ] Automatisierte Validierungsroutinen
-
-3. **Debug-Workflow**:
-   - [ ] API-Fehler in Bruno identifizieren
-   - [ ] Direkte Datenbank-Inspektion über UI
-   - [ ] Fehlerursachen durch kombinierte Sicht ermitteln
-   
-4. **Dokumentation**:
-   - [ ] API-Test-Szenarien dokumentieren
-   - [ ] Datenbank-Schemas verknüpfen
-   - [ ] Gemeinsame Testfälle beschreiben
-
-5. **CI/CD Integration**:
-   - [ ] Automatisierte Tests mit beiden Tools
-   - [ ] Validierung in Pipeline einbauen
-   - [ ] Reporting über API- und DB-Status
-
-#### F. Database Tools [PRIORITÄT: HOCH]
-1. **Migration Management**:
-   ```sql
-   -- migrations/V1__initial.sql
-   CREATE TABLE api_logs (
-       id SERIAL PRIMARY KEY,
-       endpoint VARCHAR(255),
-       response_time INTEGER,
-       status_code INTEGER
-   );
-   ```
-
-2. **Monitoring Queries**:
-   ```sql
-   -- monitoring/performance.sql
-   SELECT 
-       endpoint,
-       AVG(response_time) as avg_response,
-       COUNT(*) as calls
-   FROM api_logs
-   GROUP BY endpoint;
-   ```
-
-#### G. Integration Checklist [PRIORITÄT: HOCH]
-- [ ] Monitoring Stack aufsetzen
-- [ ] DevContainer konfigurieren
-- [ ] Test-Framework implementieren
-- [ ] Dokumentation erstellen
-- [ ] CI/CD Pipeline einrichten
-- [ ] Database Tools installieren
-
-#### H. Wartung & Updates
-- [ ] Wöchentliche Dependency Updates
-- [ ] Monatliche Performance-Überprüfung
-- [ ] Quartalsweise Security Audits
-- [ ] Jährliche Architektur-Review
+#### C. Bruno Backend Integration
+- [ ] Create Django app for Bruno API testing
+  - [ ] Set up models for API requests, responses, and collections
+  - [ ] Create serializers for Bruno data structures
+  - [ ] Implement views for Bruno API operations
+- [ ] Implement authentication for Bruno API
+- [ ] Create middleware for request/response logging
+- [ ] Move file-upload.js from Bruno to Perplexica components
+- [ ] Implement database storage for Bruno collections
+- [ ] Create API endpoints for Bruno operations:
+  - [ ] Save/load collections
+  - [ ] Execute requests
+  - [ ] Manage environments
+  - [ ] Handle authentication
+- [ ] Implement request validation and testing
+- [ ] Add performance monitoring for API requests
 
 # Notiz: Diese Integrationen sind essentiell für eine robuste Entwicklungsumgebung
 # und sollten priorisiert implementiert werden.
+
+### 15. Metabase Integration
+
+#### A. Backend Setup
+- [ ] Metabase Server Integration
+  - [ ] Docker Container Setup
+  - [ ] Datenbank-Verbindung konfigurieren
+  - [ ] API-Schlüssel und Authentifizierung einrichten
+  - [ ] Health-Check Endpoint
+  - [ ] Backend-Route für Token-Generierung
+
+#### B. Konfiguration
+- [ ] Metabase Grundkonfiguration
+  - [ ] Environment Variables
+  - [ ] Django Settings Integration
+  - [ ] API Endpoints Setup
+  - [ ] Sicherheitseinstellungen
+  - [ ] Benutzer & Rollen
+
+#### C. Dashboards
+- [ ] Test-Dashboards erstellen
+  - [ ] System Performance Dashboard
+  - [ ] User Activity Dashboard
+  - [ ] Document Analytics Dashboard
+  - [ ] Search Analytics Dashboard
+  - [ ] Error Tracking Dashboard
+
+### 16. Search Frontend Enhancement (Perplexica)
+
+#### A. Search Interface Improvements
+- [ ] Provider Management:
+  - [x] Dynamisches Hinzufügen neuer Provider (ähnlich VSCode Features)
+  - [x] Provider Konfigurationsinterface
+  - [x] Provider Prioritätsmanagement
+  - [ ] Provider Gruppierung (z.B. "Frequently Used", "Custom", etc.)
+
+#### B. Universal Search Enhancement
+- [ ] AI-gesteuerte Suchstrategie:
+  - [ ] Automatische Provider-Auswahl basierend auf Query
+  - [ ] Intelligentes Result-Ranking
+  - [ ] Query Understanding & Reformulation
+  - [ ] Context-aware Search
+- [ ] Search Result Management:
+  - [ ] Speichern von Suchergebnissen in der Datenbank
+  - [ ] Verwendung gespeicherter Ergebnisse als Kontext für LLM-Anfragen
+  - [ ] Tagging und Kategorisierung von Suchergebnissen
+  - [ ] Relevanz-Bewertung durch Benutzer
+
+#### C. UI/UX Optimierungen
+- [ ] Advanced Filter Interface
+- [ ] Result Preview Cards
+- [ ] Keyboard Shortcuts
+- [ ] Search History Management
+- [ ] Custom Views pro Provider
+
+#### D. Optional: Advanced Web Scraping Integration
+- [ ] Playwright Integration für JavaScript-lastige Websites:
+  - [ ] Installation und Konfiguration (`pip install playwright && playwright install`)
+  - [ ] Browser-Pool für parallele Anfragen
+  - [ ] Caching-Strategien für gerenderte Seiten
+  - [ ] Fallback-Mechanismus auf einfaches Scraping
+  - [ ] Headless-Modus für Produktionsumgebung
+
+### 17. Search Backend Integration
+
+#### A. Search App Structure
+- [ ] Models erweitern:
+  - [ ] SearchQuery (Suchanfragen speichern)
+  - [ ] SearchResult (Ergebnisse cachen)
+  - [ ] Provider (Provider-Konfigurationen)
+  - [ ] CustomProvider (Benutzerdefinierte Provider)
+
+#### B. API Endpoints
+- [ ] Core Search Endpoints:
+  - [ ] Universal Search (`/api/search/universal/`)
+  - [ ] Provider-specific Search (`/api/search/<provider>/`)
+  - [ ] Multi-Provider Search (`/api/search/multi/`)
+  
+- [ ] Provider Management:
+  - [ ] Provider Liste (`/api/search/providers/`)
+  - [ ] Provider hinzufügen/bearbeiten (`/api/search/providers/manage/`)
+  - [ ] Provider Konfiguration (`/api/search/providers/config/`)
+
+#### C. Provider Integration
+- [ ] Universal Search Implementation
+  - [ ] AI-gesteuerte Suchstrategie
+  - [ ] Ergebnis-Ranking
+  - [ ] Caching-System
+
+- [ ] Standard Provider:
+  - [ ] Web Search
+  - [ ] Academic Search
+  - [ ] Documentation Search
+  - [ ] Local Files Search
+
+- [ ] External Provider:
+  - [ ] Apollo.io Integration
+  - [ ] EU Open Data Portal
+  - [ ] Zefix/Swissfirms
+
+#### D. Performance & Caching
+- [ ] Redis Cache Integration
+- [ ] Rate Limiting pro Provider
+- [ ] Ergebnis-Aggregation
+- [ ] Async Processing
+
+### 18. AI Model Integration & Provider Dependencies
+
+#### A. LLM Integration
+- [ ] Entscheidung & Integration der Core LLMs:
+  - [ ] Claude Integration (aus models_app)
+  - [ ] GPT Integration (verschiedene Versionen)
+  - [ ] Lokale Modelle (z.B. Llama, Mistral)
+  
+#### B. Embedding & Similarity
+- [ ] Embedding Models für Search:
+  - [ ] Text Embeddings (z.B. OpenAI ada-002)
+  - [ ] Cross-Encoder für Re-Ranking
+  - [ ] Bi-Encoder für Similarity Search
+
+#### C. Document Processing Chain
+- [ ] ColPali/Colqwen Integration:
+  - [ ] OCR-freie Dokumentenextraktion
+  - [ ] Strukturierte Dokumentenanalyse
+  - [ ] RAG Pipeline Setup
+
+- [ ] Backup OCR Chain:
+  - [ ] Tesseract Integration
+  - [ ] Layout Analysis
+  - [ ] Post-Processing
+
+#### D. Search Infrastructure
+- [ ] SearXNG Integration:
+  - [ ] Lokale Instance Setup
+  - [ ] API Wrapper
+  - [ ] Result Parser
+  - [ ] Custom Engine Config
+
+#### E. Provider-Specific AI Features
+- [ ] Academic Search:
+  - [ ] Paper Understanding
+  - [ ] Citation Analysis
+  - [ ] Field Classification
+
+- [ ] Documentation Search:
+  - [ ] Code Understanding
+  - [ ] API Documentation Parsing
+  - [ ] Technical Context Analysis
+
+- [ ] Local Files Search:
+  - [ ] Document Vectorization
+  - [ ] Semantic Search
+  - [ ] Content Classification  
+
+### 19. Chat Interface AI Model Integration
+- [ ] Implement intelligent AI model architecture
+  - [ ] Create base model interface and abstraction layer
+  - [ ] Implement model registry and discovery system
+  - [ ] Develop automatic model routing based on query content
+- [ ] Add support for various AI models:
+  - [ ] Generative text models (GPT, Claude, etc.)
+  - [ ] ColPali for document vision tasks
+  - [ ] Audio processing models (Whisper, etc.)
+  - [ ] Text-to-Speech capabilities
+  - [ ] Image generation and analysis models
+  - [ ] Multimodal models for mixed content
+- [ ] Implement smart model selection:
+  - [ ] Query analysis to determine optimal model
+  - [ ] Content-type based routing
+  - [ ] Fallback mechanisms for model unavailability
+  - [ ] Cost-aware model selection
+- [ ] Create unified response handling:
+  - [ ] Streaming support for compatible models
+  - [ ] Standardized response format
+  - [ ] Error handling and graceful degradation
+- [ ] Add performance and usage features:
+  - [ ] Response caching system
+  - [ ] Usage tracking and quota management
+  - [ ] Performance analytics dashboard
+  - [ ] A/B testing framework for model comparison
+
+**IMPORTANT NOTE:** Need to research more about modern approaches to AI model selection and routing. OpenAI and other providers are moving toward automatic model selection based on query content rather than explicit model choice. Further investigation required to implement the most efficient and cost-effective approach.
+
+### 20. Business Analytics AI Integration
+- [ ] Research and implement specialized analytics models:
+  - [ ] **Tabular Data Models**:
+    - [ ] Microsoft TabPFN (state-of-the-art for small/medium tabular datasets)
+    - [ ] NVIDIA NVTabular for large-scale tabular processing
+    - [ ] TabTransformer for structured business data
+  - [ ] **Time Series Models**:
+    - [ ] Nixtla TimeGPT for forecasting business metrics
+    - [ ] Chronos for temporal pattern recognition
+    - [ ] Prophet/NeuralProphet for trend analysis
+  - [ ] **Multimodal Business Intelligence**:
+    - [ ] LLMs with retrieval augmentation for report generation
+    - [ ] GPT-4 with structured data plugins
+    - [ ] Anthropic Claude for document analysis and summarization
+  - [ ] **Domain-Specific Models**:
+    - [ ] Financial models (Bloomberg GPT architecture)
+    - [ ] Customer behavior prediction models
+    - [ ] Supply chain optimization models
+- [ ] Implement data preprocessing pipeline:
+  - [ ] Use Polars for high-performance data manipulation
+  - [ ] Implement chunking for large datasets
+  - [ ] Create data validation and cleaning workflows
+- [ ] Create visualization and reporting system:
+  - [ ] Interactive dashboards with drill-down capabilities
+  - [ ] Automated insight generation
+  - [ ] Natural language querying of business data
+- [ ] Develop model evaluation framework:
+  - [ ] Business-specific KPI tracking
+  - [ ] A/B testing infrastructure
+  - [ ] Model drift detection
+
+**IMPORTANT NOTE:** Focus on performance optimization for business analytics models. According to recent research, specialized models often outperform general-purpose LLMs for structured business data. Consider using Python libraries like Polars instead of Pandas for better performance with large datasets, and implement proper chunking strategies for data that doesn't fit in memory.
+
+### 21. Integriertes Fehlererkennungs- und Reparatursystem
+
+#### A. Grundlegende Komponenten
+- [ ] Void AI als Basis-Entwicklungstool einrichten:
+  - [ ] Integration in die Entwicklungsumgebung
+  - [ ] Konfiguration für die Codebase
+  - [ ] Anpassung an Django/JavaScript-Spezifika
+- [ ] Semgrep für statische Codeanalyse implementieren:
+  - [ ] Benutzerdefinierte Regeln für häufige Fehler erstellen
+  - [ ] Sicherheitsregeln für Django und JavaScript konfigurieren
+  - [ ] CI/CD-Pipeline-Integration
+
+#### B. Fehlererfassungssystem
+- [ ] Umfassendes Logging-System einrichten:
+  - [ ] Frontend-Fehler mit detailliertem Kontext erfassen
+  - [ ] Backend-Exceptions mit Stack-Traces sammeln
+  - [ ] Performance-Probleme und Timeouts identifizieren
+  - [ ] Benutzerberichte über UI-Probleme integrieren
+- [ ] Zentrales Fehler-Dashboard entwickeln:
+  - [ ] Fehlerklassifizierung und -priorisierung
+  - [ ] Trendanalyse und Häufigkeitsauswertung
+  - [ ] Integration mit Issue-Tracking-System
+
+#### C. Automatisiertes Reparatursystem
+- [ ] Orchestrierungsschicht für Reparaturprozess entwickeln:
+  - [ ] Fehleranalyse mit Void und Semgrep
+  - [ ] Patch-Generierung mit Void AI
+  - [ ] Testausführung zur Validierung
+  - [ ] Versionskontrolle und Rollback-Mechanismen
+- [ ] Sicherheitsmaßnahmen implementieren:
+  - [ ] Sandbox-Umgebung für Reparaturversuche
+  - [ ] Berechtigungssystem für automatische Änderungen
+  - [ ] Audit-Trail für alle durchgeführten Reparaturen
+
+#### D. Entwickler-Schnittstelle
+- [ ] UI für Fehlerüberwachung und -behebung:
+  - [ ] Dashboard für aktuelle Fehler und Status
+  - [ ] Diff-Viewer für vorgeschlagene Änderungen
+  - [ ] Manuelle Überprüfung und Genehmigung
+  - [ ] Feedback-Mechanismus für Reparaturqualität
+
+#### E. Erweiterte Anwendungsfälle
+- [ ] Proaktive Code-Qualitätsverbesserung:
+  - [ ] Automatische Refaktorierung von ineffizientem Code
+  - [ ] Sicherheitslücken-Erkennung und -Behebung
+  - [ ] Performance-Optimierungen
+  - [ ] Testabdeckung verbessern
+- [ ] Entwicklungsunterstützung:
+  - [ ] Automatische Dokumentationsgenerierung
+  - [ ] Code-Vervollständigung und -Vorschläge
+  - [ ] Architektur-Analyse und -Empfehlungen
+  - [ ] Technische Schulden identifizieren und reduzieren
+
+#### F. Alternative Architekturoptionen
+
+##### Option 1: Hybrides System (Void + APR + Monitoring)
+```
+┌─────────────────┐     ┌─────────────────┐     ┌─────────────────┐
+│  Fehlermonitor  │────▶│  Fehleranalyse  │────▶│ Reparaturmodul  │
+└─────────────────┘     └─────────────────┘     └─────────────────┘
+        │                       │                       │
+        │                       │                       │
+        ▼                       ▼                       ▼
+┌─────────────────┐     ┌─────────────────┐     ┌─────────────────┐
+│ Logging-System  │     │     Void AI     │     │  APR-Toolchain  │
+└─────────────────┘     └─────────────────┘     └─────────────────┘
+```
+
+- **Komponenten**:
+  - [ ] Fehlermonitor für Runtime-Fehler und Exceptions
+  - [ ] Fehleranalyse mit Void AI für Codekontext-Verständnis
+  - [ ] APR-Toolchain (SequenceR, CoCoNuT, TBar) für spezialisierte Reparaturen
+  - [ ] Integriertes Logging-System für Fehlererfassung
+
+- **Vorteile**:
+  - Umfassende Fehlererfassung in Echtzeit
+  - Kombination von allgemeiner und spezialisierter Reparatur
+  - Gute Abdeckung verschiedener Fehlertypen
+
+##### Option 2: Sicherheitsorientiertes System (Void + Semgrep + Snyk) ⭐ EMPFOHLENER AUSGANGSPUNKT ⭐
+```
+┌─────────────────┐     ┌─────────────────┐     ┌─────────────────┐
+│  Semgrep/Snyk   │────▶│     Void AI     │────▶│  Test-Pipeline  │
+└─────────────────┘     └─────────────────┘     └─────────────────┘
+        │                       │                       │
+        │                       │                       │
+        ▼                       ▼                       ▼
+┌─────────────────┐     ┌─────────────────┐     ┌─────────────────┐
+│ Sicherheits-DB  │     │ Patch-Generator │     │ CI/CD-Integration│
+└─────────────────┘     └─────────────────┘     └─────────────────┘
+```
+
+- **Komponenten**:
+  - [ ] Semgrep/Snyk für Sicherheitsanalyse und Schwachstellenerkennung
+  - [ ] Void AI für kontextbezogene Patch-Generierung
+  - [ ] Automatisierte Test-Pipeline für Patch-Validierung
+  - [ ] CI/CD-Integration für nahtlose Bereitstellung
+
+- **Vorteile**:
+  - Fokus auf Sicherheitslücken und deren Behebung
+  - Proaktive Erkennung von Schwachstellen
+  - Automatisierte Validierung und Bereitstellung
+  - Ideal für Webanwendungen wie Django-Projekte
+
+##### Option 3: Facebook Infer + Void + CI/CD
+```
+┌─────────────────┐     ┌─────────────────┐     ┌─────────────────┐
+│ Facebook Infer  │────▶│     Void AI     │────▶│  GitHub Actions │
+└─────────────────┘     └─────────────────┘     └─────────────────┘
+        │                       │                       │
+        │                       │                       │
+        ▼                       ▼                       ▼
+┌─────────────────┐     ┌─────────────────┐     ┌─────────────────┐
+│  Statische DB   │     │ Code-Generator  │     │ Auto-PR-System  │
+└─────────────────┘     └─────────────────┘     └─────────────────┘
+```
+
+- **Komponenten**:
+  - [ ] Facebook Infer für tiefgreifende statische Analyse
+  - [ ] Void AI für intelligente Code-Generierung
+  - [ ] GitHub Actions für automatisierte Workflows
+  - [ ] Automatisches PR-System für Code-Reviews
+
+- **Vorteile**:
+  - Erkennung komplexer Fehler (Speicherlecks, Race Conditions)
+  - Nahtlose Integration in den Entwicklungsworkflow
+  - Transparenter Review-Prozess für generierte Fixes
+
+**WICHTIGER HINWEIS:** Das integrierte System sollte zunächst in einer isolierten Entwicklungsumgebung getestet werden. Ein schrittweiser Ansatz mit zunehmender Autonomie ist empfehlenswert, beginnend mit Vorschlägen zur manuellen Überprüfung und fortschreitend zu automatischen Reparaturen für gut verstandene Fehlertypen.
+
+**Implementierungshinweis:** Dieses System bietet einen guten Ausgangspunkt, da es sich auf Sicherheitsaspekte konzentriert, die für Webanwendungen besonders kritisch sind. Die Integration von Semgrep/Snyk mit Void AI ermöglicht eine effektive Erkennung und Behebung von Sicherheitslücken.
