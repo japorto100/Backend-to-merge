@@ -16,7 +16,7 @@ git remote -v
 
 # Entfernen Sie das Submodul aus der Git-Konfiguration
 Write-Host "Entferne localgpt_vision_django aus der Git-Konfiguration..." -ForegroundColor Blue
-git rm --cached localgpt_vision_django
+git rm --cached localgpt_vision_django 2>$null
 git config -f .git/config --remove-section submodule.localgpt_vision_django 2>$null
 Remove-Item -Path .git/modules/localgpt_vision_django -Recurse -Force -ErrorAction SilentlyContinue
 
@@ -60,8 +60,5 @@ if ($LASTEXITCODE -eq 0) {
 } else {
     Write-Host "⚠ Es gab ein Problem beim Pushen. Bitte überprüfen Sie die Fehlermeldungen." -ForegroundColor Yellow
 }
-
-# Lokalen Branch umbenennen
-git branch -m master main
 
 
